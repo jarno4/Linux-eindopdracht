@@ -19,6 +19,8 @@ mkdir /var/www/munin
 chown munin:munin /var/www/munin
 service munin-node restart
 
+sed -i 's|Alias /munin /var/cache/munin/www|Alias /munin /var/www/munin|g' /etc/munin/apache24.conf
+sed -i 's|<Directory /var/cache/munin/www>|<Directory /var/www/munin>|g' /etc/munin/apache24.conf
 sed -i 's/Require local/Require all granted/g' /etc/munin/apache24.conf
 sed -i 's/Options None/Options FollowSymLinks SymLinksIfOwnerMatch/g' /etc/munin/apache24.conf
 
