@@ -1,0 +1,11 @@
+#!/bin/bash
+
+read -p "Geef de naam op van de client: " client
+read -p "Geef het ip-adres op van de client: " ip
+
+printf "
+[$client]
+	address $ip
+	use_node_name yes \n" >> /etc/munin/munin.conf
+
+service apache2 restart

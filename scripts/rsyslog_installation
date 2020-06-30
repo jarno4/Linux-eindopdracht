@@ -1,0 +1,21 @@
+#!/bin/bash
+
+apt-get install rsyslog -y
+
+sed -i 's|#module(load="imudp")|module(load="imudp")|g' /etc/rsyslog.conf
+sed -i 's|#input(type="imudp" port="514")|input(type="imudp" port="514")|g' /etc/rsyslog.conf
+sed -i 's|#module(load="imtcp")|module(load="imtcp")|g' /etc/rsyslog.conf
+sed -i 's|#input(type="imtcp" port="514")|input(type="imtcp" port="514")|g' /etc/rsyslog.conf
+
+cat >> /etc/rsyslog.conf << EOF
+$template remote-incoming-logs,"/var/log/remotelogs/%HOSTNAME%/%PROGRAMNAME%.log"
+authpriv.* ?incominglogs
+EOF
+
+mkdir /var/log/remotelogs
+chmod 777 /var/log/remotelogs
+
+systemctl restart rsyslog
+
+ufw allow 514/tcp
+ufw allow 514/udp

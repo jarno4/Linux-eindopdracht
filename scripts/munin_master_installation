@@ -1,23 +1,23 @@
 #!bin/bash
 
-#apt-get install apache2 -y
-#apt-get install munin -y
+apt-get install apache2 -y
+apt-get install munin -y
 
-#printf "
-#dbdir /var/lib/munin
-#htmldir /var/www/munin
-#logdir /var/log/munin
-#rundir /var/run/munin
-#tmpldir /etc/munin/templates" >> /etc/munin/munin.conf
+printf "
+dbdir /var/lib/munin
+htmldir /var/www/munin
+logdir /var/log/munin
+rundir /var/run/munin
+tmpldir /etc/munin/templates" >> /etc/munin/munin.conf
 
-#sed -i 's/localhost.localdomain/MuninMonitor/g' /etc/munin/munin.conf
-#sed -i 's|Alias /munin /var/cache/munin/www|Alias /munin /var/www/munin|g' /etc/munin/apache.conf
-#sed  -i 's|<Directory /var/cache/munin/www>|<Directory /var/munin/www>|g' /etc/munin/apache.conf
-#sed -i 's|Allow from localhost 127.0.0.0/8 ::1|Allow from all|g' /etc/munin/apache.conf
+sed -i 's/localhost.localdomain/MuninMonitor/g' /etc/munin/munin.conf
+sed -i 's|Alias /munin /var/cache/munin/www|Alias /munin /var/www/munin|g' /etc/munin/apache.conf
+sed  -i 's|<Directory /var/cache/munin/www>|<Directory /var/munin/www>|g' /etc/munin/apache.conf
+sed -i 's|Allow from localhost 127.0.0.0/8 ::1|Allow from all|g' /etc/munin/apache.conf
 
-#mkdir /var/www/munin
-#chown munin:munin /var/www/munin
-#service munin-node restart
+mkdir /var/www/munin
+chown munin:munin /var/www/munin
+service munin-node restart
 
 sed -i 's/Require local/Require all granted/g' /etc/munin/apache24.conf
 sed -i 's/Options None/Options FollowSymLinks SymLinksIfOwnerMatch/g' /etc/munin/apache24.conf
