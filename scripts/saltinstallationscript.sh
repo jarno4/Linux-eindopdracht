@@ -17,7 +17,7 @@ elif [[ $1 == 'minion' ]] ; then
 	echo 'minion'
 	curl -L https://bootstrap.saltstack.com -o install_salt.sh
 	sh install_salt.sh
-	sh -c "echo '10.0.7.84 salt' >> /etc/hosts"
+	sh -c "echo '10.0.7.163 salt' >> /etc/hosts"
 	sh -c "echo 'master: salt' >> /etc/salt/minion"
 	systemctl restart salt-minion
 
