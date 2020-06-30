@@ -8,7 +8,7 @@ sed -i 's|#module(load="imtcp")|module(load="imtcp")|g' /etc/rsyslog.conf
 sed -i 's|#input(type="imtcp" port="514")|input(type="imtcp" port="514")|g' /etc/rsyslog.conf
 
 cat >> /etc/rsyslog.conf << EOF
-$template remote-incoming-logs,"/var/log/remotelogs/%HOSTNAME%/%PROGRAMNAME%.log"
+\$template incominglogs, "/var/log/remotelogs/%HOSTNAME%/%PROGRAMNAME%.log"
 authpriv.* ?incominglogs
 EOF
 
